@@ -1,0 +1,642 @@
+/* ==========================================================================
+   CatFinder — hoja de estilos del sitio
+   Gatiten Software
+
+   Una sola hoja para todas las páginas: el navegador la descarga una vez y la
+   reutiliza en el resto de la navegación.
+
+   Paleta tomada del arte de la marca y del tema de la app (constants/theme.ts):
+   el naranja #F1760E es el de las manchas del gato y del pin del logo; el
+   coral #E8563A es el `primary` de la app y el color del nombre.
+
+   Nota sobre contraste: #E8563A sobre blanco da 3.6:1, suficiente para texto
+   grande pero no para texto corrido (WCAG AA pide 4.5:1). Por eso existe
+   --coral-texto, una versión oscurecida que llega a 5:1 y es la que se usa en
+   enlaces y botones.
+   ========================================================================== */
+
+:root{
+  --naranja:       #f1760e;
+  --coral:         #e8563a;
+  --coral-texto:   #c0421f;
+  --carbon:        #252525;
+  --texto:         #333333;
+  --texto-suave:   #666666;
+  --borde:         #e6e6e6;
+  --crema:         #fdece0;
+  --borde-crema:   #f6d3b4;
+  --crema-fondo:   #f9f1e4;
+  --panel:         rgba(255, 255, 255, 0.85);
+  --blanco-solido: #ffffff;
+
+  --ancho-max:     1080px;
+  --ancho-texto:   720px;
+  --radio:         18px;
+  --radio-chico:   12px;
+  --sombra:        0 2px 16px rgba(80, 50, 30, 0.08);
+
+  --fuente: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+html{
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+
+  background-color: var(--blanco-solido);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body{
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--fuente);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--texto);
+  /* Sin color de fondo propio: así el canvas toma el del elemento raíz, que es
+     blanco, y el rebote elástico bajo el pie no descubre el crema. El patrón
+     lo pinta la capa .fondo. */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo fijo.
+   `position: sticky` y no `fixed`: una capa fija se queda clavada al viewport
+   durante el rebote elástico, y cuando el contenido se desplaza deja asomar el
+   patrón por encima de la barra o por debajo del pie. Una capa sticky sigue
+   pegada al viewport mientras se hace scroll —el efecto visual es el mismo—
+   pero pertenece al flujo del documento, así que acompaña al contenido cuando
+   este rebota y nunca invade las franjas blancas.
+
+   La capa mide cero de alto y el patrón lo pinta un pseudo-elemento absoluto,
+   de modo que no ocupa espacio en el flujo ni alarga la página.
+
+   No se usa `background-attachment: fixed` porque Safari en iOS lo ignora:
+   ancla la imagen al documento completo y la escala al alto total de la página.
+   `cover` amplía la imagen conservando su proporción y recorta el sobrante. */
+.fondo{
+  position: sticky;
+  top: 0;
+  height: 0;
+  z-index: -1;
+}
+
+.fondo::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: var(--crema-fondo);
+  background-image: url('/assets/fondo-patron.webp');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Estructura
+   -------------------------------------------------------------------------- */
+
+.envoltura{
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.panel{
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  margin: 1rem 0 2.5rem;
+  overflow: hidden;
+}
+
+/* Variante para páginas de texto: ancho cómodo de lectura. */
+.panel--texto{
+  max-width: var(--ancho-texto);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contenido{ padding: 1.5rem 1.25rem 2.5rem; }
+
+/* --------------------------------------------------------------------------
+   Encabezado
+   -------------------------------------------------------------------------- */
+
+/* La franja se prolonga una pantalla hacia arriba, como respaldo para los
+   navegadores que ignoren overscroll-behavior. Hacia arriba no genera scroll,
+   porque el desplazamiento no toma valores negativos. */
+.cabecera{
+  position: relative;
+  background: var(--blanco-solido);
+  border-bottom: 1px solid var(--borde);
+}
+
+.cabecera::before{
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: var(--blanco-solido);
+}
+
+.cabecera__interior{
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.marca{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--coral);
+}
+
+.marca img{
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.marca span{
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Selector de idioma */
+.idiomas{
+  display: inline-flex;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  overflow: hidden;
+  font-size: 0.82rem;
+}
+
+.idiomas a{
+  padding: 0.35rem 0.75rem;
+  text-decoration: none;
+  color: var(--texto-suave);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.idiomas a[aria-current="true"]{
+  background: var(--coral-texto);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Tipografía
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3{ color: var(--carbon); line-height: 1.25; }
+
+h1{ font-size: 1.75rem; margin: 0 0 0.5rem; }
+h2{ font-size: 1.3rem; margin: 0 0 0.75rem; scroll-margin-top: 1rem; }
+h3{ font-size: 1.02rem; margin: 1.5rem 0 0.5rem; }
+
+p{ margin: 0 0 1rem; }
+
+ol, ul{ margin: 0 0 1rem; padding-left: 1.35rem; }
+li{ margin-bottom: 0.5rem; }
+
+a{ color: var(--coral-texto); }
+a:hover{ text-decoration: none; }
+
+:focus-visible{
+  outline: 3px solid var(--coral-texto);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.bajada{ color: var(--texto-suave); margin: 0 0 1.75rem; }
+
+.etiqueta{
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* #b5591f sobre el crema daba 4.14:1, bajo el mínimo AA de 4.5:1 para
+     texto pequeño. Este tono llega a 5.1:1 sin cambiar el carácter del color. */
+  color: #a04d18;
+  background: var(--crema);
+  border: 1px solid var(--borde-crema);
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  margin: 0 0 0.75rem;
+}
+
+.fecha-actualizacion{
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin: 0 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Portada
+   -------------------------------------------------------------------------- */
+
+.portada{
+  text-align: center;
+  padding: 2.5rem 1.25rem 1.5rem;
+}
+
+.portada__logo{
+  width: auto;
+  height: 160px;
+  display: block;
+  margin: 0 auto 1.25rem;
+}
+
+.portada h1{
+  font-size: 2.25rem;
+  color: var(--coral);
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.portada__lema{
+  font-size: 1.1rem;
+  color: var(--texto);
+  max-width: 34ch;
+  margin: 0 auto 1.5rem;
+}
+
+.descripcion{
+  padding: 0 1.25rem 2.25rem;
+  max-width: 62ch;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.descripcion p{ margin-bottom: 0; }
+
+/* --------------------------------------------------------------------------
+   Pantallas de la app
+   -------------------------------------------------------------------------- */
+
+.pantallas{ padding: 0.5rem 1.25rem 2.5rem; }
+
+.pantallas h2{ text-align: center; margin-bottom: 1.75rem; }
+
+.pantallas__lista{
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pantalla{ max-width: 320px; text-align: center; }
+
+/* Marco de teléfono dibujado con CSS: evita cargar una imagen extra. */
+.pantalla__marco{
+  border: 8px solid var(--carbon);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--carbon);
+  box-shadow: 0 6px 22px rgba(60, 40, 25, 0.18);
+  margin-bottom: 1rem;
+  line-height: 0;
+}
+
+.pantalla__marco img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.pantalla h3{ margin: 0 0 0.35rem; font-size: 1.05rem; }
+.pantalla p{ margin: 0; font-size: 0.94rem; color: var(--texto-suave); }
+
+/* En pantallas anchas: tres columnas con el mapa destacado al centro. */
+@media (min-width: 860px){
+  .pantallas__lista{
+    grid-template-columns: 1fr 1.18fr 1fr;
+    gap: 1.75rem;
+    align-items: end;
+  }
+  .pantalla{ max-width: none; }
+  .pantalla--principal .pantalla__marco{
+    border-width: 10px;
+    box-shadow: 0 10px 30px rgba(60, 40, 25, 0.24);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Botones de las tiendas
+   Áreas de protección según las guías oficiales: Google Play pide un margen
+   libre equivalente al 25% de la altura del badge; Apple, al 10% del suyo.
+   El espaciado de abajo cubre ambos con holgura.
+   -------------------------------------------------------------------------- */
+
+.tiendas{
+  border-top: 1px solid var(--borde);
+  padding: 2.25rem 1.25rem 2.75rem;
+  text-align: center;
+}
+
+.tiendas h2{ margin-bottom: 1.25rem; }
+
+/* Los dos badges se igualan por ALTURA, no por ancho: sus proporciones
+   oficiales difieren (Google Play 238.96x70.87 = 3.37; App Store
+   119.66x40 = 2.99) y ninguno trae margen dentro de su lienzo, así que a
+   la misma altura quedan ópticamente parejos. El espacio entre ellos cubre
+   el área de protección que piden ambas marcas: Google exige un 25% de la
+   altura del badge (12px a 48px de alto) y Apple un 10%. */
+.tiendas__fila{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 0.75rem 0;
+}
+
+.tiendas__fila a,
+.tiendas__fila .badge-inactivo{
+  display: block;
+  line-height: 0;
+  border-radius: 8px;
+}
+
+.tiendas__fila img{
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.tiendas__fila a{ transition: transform 0.2s ease, opacity 0.2s ease; }
+.tiendas__fila a:hover{ transform: translateY(-2px); opacity: 0.88; }
+
+/* Badge sin enlace, mientras la ficha de la tienda no exista.
+   No lleva filtro de color ni opacidad: las guías de ambas marcas prohíben
+   alterar el badge, y una versión monocroma o desvaída es precisamente eso.
+   Que todavía no esté disponible lo dice el sello "Próximamente". */
+.badge-inactivo{ cursor: default; }
+
+.proximamente{
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a04d18;
+  background: var(--crema);
+  border: 1px solid var(--borde-crema);
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  margin: 1.25rem 0 0;
+}
+
+/* Acceso a la beta.
+   Va en un botón propio y no sobre el badge de App Store: ese badge dice
+   "Download on the App Store" y las guías de marketing de Apple lo reservan
+   para enlazar a una ficha publicada en la tienda. TestFlight es otra cosa —
+   exige instalar la app TestFlight primero— y prometer una descarga que no
+   existe confunde a quien llega. */
+.beta{
+  margin: 2rem auto 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--borde);
+  max-width: 46ch;
+}
+
+.beta__texto{ margin: 0 0 1rem; }
+
+.boton{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  background: var(--coral-texto);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.boton:hover{ background: #a63719; transform: translateY(-1px); }
+
+.beta__nota{
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin: 1rem 0 0;
+}
+
+/* --------------------------------------------------------------------------
+   Tarjetas de navegación (índices internos)
+   -------------------------------------------------------------------------- */
+
+.tarjetas{
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tarjetas a{
+  display: block;
+  text-decoration: none;
+  color: var(--texto);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--coral);
+  border-radius: var(--radio-chico);
+  padding: 0.85rem 1.1rem;
+  transition: background 0.15s ease;
+}
+
+.tarjetas a:hover{ background: var(--crema); }
+.tarjetas strong{ display: block; color: var(--carbon); }
+.tarjetas span{ font-size: 0.88rem; color: var(--texto-suave); }
+
+/* --------------------------------------------------------------------------
+   Bloques de contenido
+   -------------------------------------------------------------------------- */
+
+.bloque{
+  border-top: 1px solid var(--borde);
+  padding-top: 2rem;
+  margin-top: 2.5rem;
+}
+
+.bloque:first-of-type{ border-top: none; padding-top: 0; margin-top: 0; }
+
+.aviso{
+  background: var(--crema);
+  border: 1px solid var(--borde-crema);
+  border-radius: var(--radio-chico);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.aviso p:last-child{ margin-bottom: 0; }
+
+.ficha{
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-chico);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.ficha dl{ margin: 0; }
+
+.ficha dt{
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 0.15rem;
+}
+
+.ficha dd{
+  margin: 0 0 0.9rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.ficha dd:last-child{ margin-bottom: 0; }
+
+/* Tablas: en móvil se desplazan en horizontal en vez de comprimirse. */
+.tabla-scroll{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.95rem;
+  min-width: 460px;
+}
+
+th, td{
+  text-align: left;
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--borde);
+  vertical-align: top;
+}
+
+th{
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Pie
+   -------------------------------------------------------------------------- */
+
+.pie{
+  background: var(--blanco-solido);
+  border-top: 1px solid var(--borde);
+  padding: 2rem 1rem 2.5rem;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.pie__interior{
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pie nav ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pie nav a{
+  display: inline-block;
+  padding: 0.35rem 0;
+  min-height: 32px;
+}
+
+.pie__legal p{ margin: 0 0 0.3rem; }
+
+/* --------------------------------------------------------------------------
+   Utilidades
+   -------------------------------------------------------------------------- */
+
+.solo-lectores{
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Salto al contenido: visible solo al tabular. */
+.saltar{
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--blanco-solido);
+  color: var(--coral-texto);
+  padding: 0.75rem 1rem;
+  z-index: 10;
+}
+
+.saltar:focus{ left: 0; }
+
+/* --------------------------------------------------------------------------
+   Pantallas medianas y grandes
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 600px){
+  .contenido{ padding: 2rem 2rem 3rem; }
+  .portada{ padding: 3rem 2rem 2.5rem; }
+  .portada__logo{ height: 180px; }
+  .portada h1{ font-size: 2.75rem; }
+  h1{ font-size: 2rem; }
+  h2{ font-size: 1.45rem; }
+}
+
+@media (min-width: 860px){
+  .envoltura{ padding: 0 1.5rem; }
+  .panel{ margin: 2rem 0 3rem; }
+  .contenido{ padding: 2.25rem 2.75rem 3rem; }
+  .pie__interior{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}

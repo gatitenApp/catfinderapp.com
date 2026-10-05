@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CatFinder — Find and report stray cats near you</title>
-<meta name="description" content="CatFinder is a community app for reporting stray cats, seeing them on a map and helping the people who rescue them. Built by Gatiten Software in Chile.">
+<meta name="description" content="CatFinder is a community app for reporting stray cats, seeing them on a map and helping the people who rescue them. Built by Gatiten in Chile.">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="stylesheet" href="/assets/estilos.css">
 <link rel="canonical" href="https://catfinderapp.com/en/">
@@ -107,33 +107,49 @@
         </section>
 
         <section class="tiendas" aria-labelledby="download-title">
-          <h2 id="download-title">Get CatFinder</h2>
+          <h2 id="download-title">Try CatFinder</h2>
 
-          <div class="tiendas__fila">
-            <!-- TODO (René): replace each <span class="badge-inactivo"> with
-                 <a href="STORE_URL" target="_blank" rel="noopener"> once the app
-                 is published on that store. -->
-            <span class="badge-inactivo">
-              <img src="/assets/badge-google-play-en.svg" alt="Coming soon to Google Play"
-                   width="239" height="71">
-            </span>
+          <div class="plataformas">
+
+            <div class="plataforma">
+              <h3>Android</h3>
+              <p class="plataforma__estado">Testing on Google Play</p>
+              <a href="https://play.google.com/store/apps/details?id=com.gatiten.catfinder"
+                 target="_blank" rel="noopener">
+                <img src="/assets/badge-google-play-en.svg" alt="Get it on Google Play"
+                     width="239" height="71">
+              </a>
+            </div>
+
+            <div class="plataforma">
+              <h3>iPhone</h3>
+              <p class="plataforma__estado">Testing on TestFlight</p>
+              <a class="boton" href="https://testflight.apple.com/join/VshGxzwJ"
+                 target="_blank" rel="noopener">
+                <span class="boton__linea1">Install from</span>
+                <span class="boton__linea2">TestFlight</span>
+              </a>
+            </div>
+
+          </div>
+
+          <p class="aviso-desarrollo">
+            CatFinder is still in development, so both versions may have bugs. Get in touch
+            with us — we will be grateful.
+          </p>
+
+          <div class="pendiente">
+            <!-- TODO (René): once Apple approves it, replace this
+                 <span class="badge-inactivo"> with an <a href="STORE_URL"> and move
+                 the badge up next to the Google Play one. -->
             <span class="badge-inactivo">
               <img src="/app-store-badge.svg" alt="Coming soon to the App Store"
                    width="120" height="40">
             </span>
-          </div>
-
-          <p class="proximamente">Coming soon</p>
-
-          <div class="beta">
-            <p class="beta__texto">
-              In the meantime, if you have an iPhone you can try the beta version.
-            </p>
-            <a class="boton" href="https://testflight.apple.com/join/VshGxzwJ"
-               target="_blank" rel="noopener">Try the beta on TestFlight</a>
-            <p class="beta__nota">
-              You will need Apple's TestFlight app, which is free. CatFinder is still in
-              development, so this version may have bugs.
+            <p class="proximamente">In review</p>
+            <p class="pendiente__nota">
+              The first App Store version has been submitted to Apple for review. Once it is
+              published, you will be able to install it directly from there.
             </p>
           </div>
         </section>
@@ -153,7 +169,7 @@
         </ul>
       </nav>
       <div class="pie__legal">
-        <p><strong>Gatiten Software</strong> — Chile</p>
+        <p><strong>Gatiten</strong> — Chile</p>
         <p><a href="mailto:support@catfinderapp.com">support@catfinderapp.com</a></p>
       </div>
     </div>

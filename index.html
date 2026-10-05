@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CatFinder — Encuentra y reporta gatos callejeros cerca de ti</title>
-<meta name="description" content="CatFinder es una app comunitaria para reportar gatos callejeros, verlos en un mapa y ayudar a quienes los rescatan. Desarrollada por Gatiten Software en Chile.">
+<meta name="description" content="CatFinder es una app comunitaria para reportar gatos callejeros, verlos en un mapa y ayudar a quienes los rescatan. Desarrollada por Gatiten en Chile.">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="stylesheet" href="/assets/estilos.css">
 <link rel="canonical" href="https://catfinderapp.com/">
@@ -108,33 +108,49 @@
         </section>
 
         <section class="tiendas" aria-labelledby="titulo-descarga">
-          <h2 id="titulo-descarga">Descarga CatFinder</h2>
+          <h2 id="titulo-descarga">Prueba CatFinder</h2>
 
-          <div class="tiendas__fila">
-            <!-- TODO (René): reemplazar cada <span class="badge-inactivo"> por
-                 <a href="URL_DE_LA_FICHA" target="_blank" rel="noopener"> cuando
-                 la app esté publicada en esa tienda. -->
-            <span class="https://play.google.com/store/apps/details?id=com.gatiten.catfinder">
-              <img src="/assets/badge-google-play-es.svg" alt="Disponible próximamente en Google Play"
-                   width="239" height="71">
-            </span>
-            <span class="https://testflight.apple.com/join/VshGxzwJ">
-              <img src="/app-store-badge.svg" alt="Disponible próximamente en el App Store"
-                   width="120" height="40">
-            </span>
+          <div class="plataformas">
+
+            <div class="plataforma">
+              <h3>Android</h3>
+              <p class="plataforma__estado">Pruebas en Google Play</p>
+              <a href="https://play.google.com/store/apps/details?id=com.gatiten.catfinder"
+                 target="_blank" rel="noopener">
+                <img src="/assets/badge-google-play-es.svg" alt="Disponible en Google Play"
+                     width="239" height="71">
+              </a>
+            </div>
+
+            <div class="plataforma">
+              <h3>iPhone</h3>
+              <p class="plataforma__estado">Pruebas en TestFlight</p>
+              <a class="boton" href="https://testflight.apple.com/join/VshGxzwJ"
+                 target="_blank" rel="noopener">
+                <span class="boton__linea1">Instalar desde</span>
+                <span class="boton__linea2">TestFlight</span>
+              </a>
+            </div>
+
           </div>
 
-          <p class="proximamente">Próximamente</p>
+          <p class="aviso-desarrollo">
+            CatFinder está en desarrollo, así que ambas versiones podrían tener errores.
+            Contáctate con nosotros, te lo agradeceremos.
+          </p>
 
-          <div class="beta">
-            <p class="beta__texto">
-              Mientras tanto, si tienes un iPhone puedes probar la versión beta.
-            </p>
-            <a class="boton" href="https://testflight.apple.com/join/VshGxzwJ"
-               target="_blank" rel="noopener">Probar la beta en TestFlight</a>
-            <p class="beta__nota">
-              Necesitas la aplicación TestFlight de Apple, que es gratuita. CatFinder está en
-              desarrollo, así que esta versión puede tener fallas.
+          <div class="pendiente">
+            <!-- TODO (René): cuando Apple apruebe la publicación, reemplazar este
+                 <span class="badge-inactivo"> por un <a href="URL_DE_LA_FICHA"> y
+                 mover el badge junto al de Google Play, arriba. -->
+            <span class="badge-inactivo">
+              <img src="/app-store-badge.svg" alt="Próximamente en el App Store"
+                   width="120" height="40">
+            </span>
+            <p class="proximamente">En revisión</p>
+            <p class="pendiente__nota">
+              La primera versión para el App Store está enviada a revisión de Apple. Cuando se
+              publique, podrás instalarla directamente desde ahí.
             </p>
           </div>
         </section>
@@ -154,7 +170,7 @@
         </ul>
       </nav>
       <div class="pie__legal">
-        <p><strong>Gatiten Software</strong> — Chile</p>
+        <p><strong>Gatiten</strong> — Chile</p>
         <p><a href="mailto:support@catfinderapp.com">support@catfinderapp.com</a></p>
       </div>
     </div>

@@ -363,37 +363,6 @@ a:hover{ text-decoration: none; }
 
 .tiendas h2{ margin-bottom: 1.25rem; }
 
-/* Los dos badges se igualan por ALTURA, no por ancho: sus proporciones
-   oficiales difieren (Google Play 238.96x70.87 = 3.37; App Store
-   119.66x40 = 2.99) y ninguno trae margen dentro de su lienzo, así que a
-   la misma altura quedan ópticamente parejos. El espacio entre ellos cubre
-   el área de protección que piden ambas marcas: Google exige un 25% de la
-   altura del badge (12px a 48px de alto) y Apple un 10%. */
-.tiendas__fila{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1.75rem;
-  padding: 0.75rem 0;
-}
-
-.tiendas__fila a,
-.tiendas__fila .badge-inactivo{
-  display: block;
-  line-height: 0;
-  border-radius: 8px;
-}
-
-.tiendas__fila img{
-  height: 48px;
-  width: auto;
-  display: block;
-}
-
-.tiendas__fila a{ transition: transform 0.2s ease, opacity 0.2s ease; }
-.tiendas__fila a:hover{ transform: translateY(-2px); opacity: 0.88; }
-
 /* Badge sin enlace, mientras la ficha de la tienda no exista.
    No lleva filtro de color ni opacidad: las guías de ambas marcas prohíben
    alterar el badge, y una versión monocroma o desvaída es precisamente eso.
@@ -413,42 +382,127 @@ a:hover{ text-decoration: none; }
   margin: 1.25rem 0 0;
 }
 
-/* Acceso a la beta.
-   Va en un botón propio y no sobre el badge de App Store: ese badge dice
+/* Cada plataforma con su estado real y su propia acción: Android ya está en
+   Google Play, iPhone solo se instala por TestFlight. El acceso a TestFlight
+   va en un botón propio y nunca sobre el badge de App Store: ese badge dice
    "Download on the App Store" y las guías de marketing de Apple lo reservan
-   para enlazar a una ficha publicada en la tienda. TestFlight es otra cosa —
-   exige instalar la app TestFlight primero— y prometer una descarga que no
-   existe confunde a quien llega. */
-.beta{
-  margin: 2rem auto 0;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--borde);
-  max-width: 46ch;
+   para enlazar a una ficha publicada en la tienda. */
+.plataformas{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  /* En dos columnas, la distancia entre ambas acciones es (ancho + gap) / 2.
+     Con 760px y 40px de separación daba 400px; este ancho la deja en 268px,
+     un tercio menos, sin que el botón quede apretado en su columna. */
+  max-width: 510px;
+  margin: 0 auto;
 }
 
-.beta__texto{ margin: 0 0 1rem; }
+.plataforma h3{
+  margin: 0 0 0.2rem;
+  font-size: 1.05rem;
+}
 
+.plataforma__estado{
+  margin: 0 0 1.1rem;
+  font-size: 0.94rem;
+  color: var(--texto-suave);
+}
+
+/* El enlace del badge conserva a su alrededor el área de protección que pide
+   Google: un 25% de la altura del badge, 12px a los 48px que se usan aquí. */
+.plataforma a:not(.boton){
+  display: inline-block;
+  line-height: 0;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.plataforma a:not(.boton):hover{ transform: translateY(-2px); opacity: 0.88; }
+
+.plataforma img{
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+/* El botón lleva el mismo margen vertical que el resguardo del badge (12px),
+   para que ambas acciones ocupen 72px de alto y sus centros coincidan. Sin
+   esto quedan desalineadas entre columnas. */
+.plataforma .boton{ margin: 0.75rem 0; }
+
+/* Bloque del App Store, que sigue en revisión. */
+.pendiente{
+  max-width: 46ch;
+  margin: 2.5rem auto 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--borde);
+}
+
+.pendiente .badge-inactivo{ display: block; line-height: 0; }
+.pendiente img{ height: 40px; width: auto; display: block; margin: 0 auto; }
+.pendiente .proximamente{ margin: 1rem 0 0; }
+
+.pendiente__nota{
+  margin: 1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+@media (min-width: 700px){
+  .plataformas{
+    grid-template-columns: 1fr 1fr;
+    gap: 1.7rem;
+    align-items: start;
+  }
+}
+
+/* Mismas medidas y forma que el badge de Google Play: su viewBox es
+   238.96x70.87 con esquinas de 8.85, que a 48px de alto da 162x48 y un radio
+   de 6px. El texto va en dos líneas, como en el badge. */
 .boton{
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0.75rem 1.5rem;
-  background: var(--coral-texto);
+  width: 162px;
+  height: 48px;
+  border-radius: 6px;
+  line-height: 1.15;
+  /* Negro, para que acompañe a los badges de las tiendas, que también lo son.
+     Blanco sobre negro da 21:1, el contraste máximo posible. */
+  background: #000000;
   color: #fff;
-  font-weight: 600;
   text-decoration: none;
-  border-radius: 999px;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.boton:hover{ background: #a63719; transform: translateY(-1px); }
+.boton:hover{ background: var(--carbon); transform: translateY(-1px); }
 
-.beta__nota{
+/* Las dos líneas imitan la jerarquía del badge: rótulo pequeño en versales
+   arriba, nombre del servicio destacado abajo. */
+.boton__linea1{
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.boton__linea2{
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Advertencia común a las dos vías de instalación. */
+.aviso-desarrollo{
+  max-width: 48ch;
+  margin: 1.75rem auto 0;
   font-size: 0.85rem;
   color: var(--texto-suave);
-  margin: 1rem 0 0;
 }
+
 
 /* --------------------------------------------------------------------------
    Tarjetas de navegación (índices internos)

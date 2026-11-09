@@ -37,7 +37,7 @@
 
           <p class="etiqueta">Privacy</p>
           <h1>Privacy policy</h1>
-          <p class="fecha-actualizacion">Last updated: September 21, 2026</p>
+          <p class="fecha-actualizacion">Last updated: November 12, 2026</p>
 
           <p class="bajada">
             <strong>CatFinder</strong> is an app developed by <strong>Gatiten</strong>,
@@ -49,7 +49,8 @@
             <p>
               <strong>In short:</strong> CatFinder does not sell your data, shows no advertising and
               includes no analytics or cross-app tracking tools. The data we process is what you
-              need to provide in order to have an account and publish cat reports.
+              need to provide in order to have an account, publish cat reports and, if you turn
+              it on, receive alerts about new reports near you.
             </p>
           </div>
 
@@ -86,6 +87,11 @@
                     <td>Performance of the service you request</td>
                   </tr>
                   <tr>
+                    <td><strong>Google account identifier and email</strong>, if you sign in with Google</td>
+                    <td>Authenticate you without creating a password. If you sign in with Google, we also receive your name and the address of your Google profile photo. They stay in the authentication system, we do not display or use them, and they are deleted when you delete your account.</td>
+                    <td>Performance of the service you request</td>
+                  </tr>
+                  <tr>
                     <td><strong>Username, bio and profile photo</strong></td>
                     <td>Show who published each report. These are optional and you can edit or clear them at any time.</td>
                     <td>Your consent</td>
@@ -112,7 +118,32 @@
                   </tr>
                   <tr>
                     <td><strong>Device language</strong></td>
-                    <td>Show the app in your language.</td>
+                    <td>Show the app in your language and write the alerts we send you in that language.</td>
+                    <td>Performance of the service you request</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Notification token</strong> (a code the system assigns to your phone) and its platform</td>
+                    <td>Send nearby-report alerts to this phone. It is only registered if you accept notifications.</td>
+                    <td>Your consent, revocable from your phone's settings</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Approximate location for alerts</strong></td>
+                    <td>Know whether a new report is near you. It is your last known location, rounded to about 500 m. See section 3.</td>
+                    <td>Your consent</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Alert preferences</strong></td>
+                    <td>Respect whether alerts are on, whether you want urgent ones only, and quiet hours.</td>
+                    <td>Your consent</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Device time zone</strong> (the zone name, for example America/Santiago)</td>
+                    <td>Apply the quiet hours of alerts, between 23:00 and 07:00 your time. It is stored in your profile while you are signed in.</td>
+                    <td>Performance of the service you request</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Achievements</strong>: unlocked medals, the frame and pin you choose, and whether you show them on your public profile</td>
+                    <td>Show your progress in the app. Medals are calculated from your reports and sightings. See section 4.</td>
                     <td>Performance of the service you request</td>
                   </tr>
                 </tbody>
@@ -138,13 +169,25 @@
                 is closed.
               </li>
               <li>
-                <strong>Your location is not stored on our servers.</strong> It is used on your own
-                phone to center the map and to suggest a position when you create a report.
+                <strong>Your exact location is not stored on our servers.</strong> It is used on
+                your own phone to center the map and to suggest a position when you create a report.
+              </li>
+              <li>
+                <strong>Only if you turn on nearby-report alerts</strong>, we store your last known
+                location <strong>rounded to about 500 metres</strong>, never the exact position. It
+                is updated when you open the map and is used only to know whether a new report is
+                1.5 km or less from you. If you turn alerts off under
+                <strong>Settings › Notifications</strong>, that location is deleted.
               </li>
               <li>
                 <strong>The coordinates we do store are the cat's</strong>, not yours: the ones
                 attached to a report you publish. You can adjust them before publishing if you would
                 rather not pin an exact spot — for instance, if it matches your home.
+              </li>
+              <li>
+                <strong>Photos can carry location.</strong> If a photo includes the position where
+                it was taken, the app can use it on your phone to suggest the report's location.
+                Before the photo is uploaded, that data is removed from the image.
               </li>
               <li>
                 <strong>You can use the app without granting location</strong>, though the map will
@@ -164,6 +207,7 @@
               <li>Your reports, with their photos, description, status and the cat's location.</li>
               <li>Your username, your bio and your profile photo.</li>
               <li>The number of sightings recorded on each report.</li>
+              <li>Your medals and frame, unless you turn off <strong>Show my achievements and frame on my public profile</strong> under <strong>Profile › Edit Profile</strong>. It is on by default. No advertising information is ever shown.</li>
             </ul>
             <p>
               Your email address can be hidden from other people under
@@ -214,12 +258,17 @@
                   </tr>
                   <tr>
                     <td><strong>Apple</strong></td>
-                    <td>Sign in with Apple, if you choose that sign-in method.</td>
+                    <td>Sign in with Apple, if you choose that sign-in method, and delivery of notifications on iPhone and iPad.</td>
+                    <td>United States</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Google</strong></td>
+                    <td>Sign in with Google, if you choose that method, and delivery of notifications on Android.</td>
                     <td>United States</td>
                   </tr>
                   <tr>
                     <td><strong>Expo</strong></td>
-                    <td>Deliver app updates. Receives technical device data when checking for a new version.</td>
+                    <td>Deliver app updates and send nearby-report alerts through Apple and Google. Receives the notification token, the alert text and technical device data.</td>
                     <td>United States</td>
                   </tr>
                 </tbody>
@@ -260,6 +309,16 @@
               <li>Your profile: username, bio and profile photo, including the image file.</li>
               <li>Your email address.</li>
               <li>The record of the cats you marked as seen.</li>
+              <li>Your notification token, your alert preferences, your time zone and the approximate location stored for them.</li>
+              <li>Your achievements: medals, frame and pin.</li>
+              <li>If you signed in with Google, the name and photo address Google provided.</li>
+            </ul>
+
+            <p><strong>Alert data while you keep your account</strong></p>
+            <ul>
+              <li>The <strong>approximate location</strong> is kept while alerts are on, and is replaced each time it is updated. It is deleted when you turn them off or delete your account.</li>
+              <li>The <strong>notification token</strong> is deleted when you sign out on that phone, when you delete your account, or when the system reports that it is no longer valid.</li>
+              <li>The <strong>log of alerts sent</strong>, which prevents alerting you twice about the same report, is deleted automatically after 24 hours.</li>
             </ul>
 
             <p><strong>What remains published</strong></p>
@@ -341,6 +400,10 @@
                 Photographs are stored in buckets with per-user permissions and limits on file type
                 and size.
               </li>
+              <li>
+                Before a photo is uploaded, the app strips its metadata, such as the camera's GPS
+                location. If it cannot do so, the photo is not uploaded.
+              </li>
             </ul>
             <p>
               No system is infallible. If we detect a breach affecting your personal data, we will
@@ -351,7 +414,7 @@
           <section class="bloque" id="minors">
             <h2>9. Minors</h2>
             <p>
-              CatFinder is intended for people aged <strong>13 or over</strong>. We do not knowingly
+              CatFinder is intended for people aged <strong>16 or over</strong>. We do not knowingly
               collect data from children under that age. If we identify such an account, we will
               delete it along with its data. If you are a parent or guardian and believe a minor in
               your care created an account, write to
@@ -366,6 +429,10 @@
               CatFinder <strong>shows no advertising</strong>, <strong>uses no analytics tools</strong>
               and <strong>does not track your activity across other apps or websites</strong>. We do
               not use tracking cookies either: the app does not rely on a browser to work.
+            </p>
+            <p>
+              The notification token is a code the system assigns to your phone. We use it only to
+              deliver the alerts you turned on, not to identify you across apps.
             </p>
           </section>
 

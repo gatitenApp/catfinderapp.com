@@ -37,7 +37,7 @@
 
           <p class="etiqueta">Privacidad</p>
           <h1>Política de privacidad</h1>
-          <p class="fecha-actualizacion">Última actualización: 21 de septiembre de 2026</p>
+          <p class="fecha-actualizacion">Última actualización: 12 de noviembre de 2026</p>
 
           <p class="bajada">
             <strong>CatFinder</strong> es una aplicación desarrollada por
@@ -50,8 +50,8 @@
             <p>
               <strong>En resumen:</strong> CatFinder no vende tus datos, no muestra publicidad y
               no incorpora herramientas de analítica ni de rastreo entre aplicaciones. Los datos
-              que tratamos son los que necesitas entregar para tener una cuenta y publicar
-              reportes de gatos.
+              que tratamos son los que necesitas entregar para tener una cuenta, publicar
+              reportes de gatos y, si lo activas, recibir avisos de reportes nuevos cerca de ti.
             </p>
           </div>
 
@@ -88,6 +88,11 @@
                     <td>Ejecución del servicio que solicitas</td>
                   </tr>
                   <tr>
+                    <td><strong>Identificador y correo de tu cuenta de Google</strong>, si entras con Google</td>
+                    <td>Autenticarte sin crear una contraseña. Si entras con Google, recibimos también tu nombre y la dirección de tu foto de perfil de Google. Quedan en el sistema de autenticación, no los mostramos ni los usamos, y se borran al eliminar tu cuenta.</td>
+                    <td>Ejecución del servicio que solicitas</td>
+                  </tr>
+                  <tr>
                     <td><strong>Nombre de usuario, biografía y foto de perfil</strong></td>
                     <td>Mostrar quién publicó cada reporte. Son opcionales y puedes editarlos o vaciarlos cuando quieras.</td>
                     <td>Tu consentimiento</td>
@@ -114,7 +119,32 @@
                   </tr>
                   <tr>
                     <td><strong>Idioma del dispositivo</strong></td>
-                    <td>Mostrar la aplicación en tu idioma.</td>
+                    <td>Mostrar la aplicación en tu idioma y escribir en ese idioma los avisos que te enviamos.</td>
+                    <td>Ejecución del servicio que solicitas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Token de notificaciones</strong> (un código que asigna el sistema a tu teléfono) y su plataforma</td>
+                    <td>Enviarte los avisos de reportes cercanos a este teléfono. Solo se registra si aceptas recibir notificaciones.</td>
+                    <td>Tu consentimiento, revocable desde los ajustes del teléfono</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ubicación aproximada para los avisos</strong></td>
+                    <td>Saber si un reporte nuevo está cerca de ti. Es tu última ubicación conocida, redondeada a unos 500 m. Ver la sección 3.</td>
+                    <td>Tu consentimiento</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Preferencias de avisos</strong></td>
+                    <td>Respetar si los avisos están activos, si quieres solo los urgentes y el silencio nocturno.</td>
+                    <td>Tu consentimiento</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Zona horaria del dispositivo</strong> (el nombre de la zona, por ejemplo America/Santiago)</td>
+                    <td>Aplicar el silencio nocturno de los avisos, entre las 23:00 y las 07:00 de tu hora. Se guarda en tu perfil cuando tienes la sesión iniciada.</td>
+                    <td>Ejecución del servicio que solicitas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Logros</strong>: medallas desbloqueadas, marco y pin que eliges, y si los muestras en tu perfil público</td>
+                    <td>Mostrar tu progreso en la aplicación. Las medallas se calculan con tus reportes y avistamientos. Ver la sección 4.</td>
                     <td>Ejecución del servicio que solicitas</td>
                   </tr>
                 </tbody>
@@ -141,15 +171,27 @@
                 aplicación está cerrada.
               </li>
               <li>
-                <strong>Tu ubicación no se guarda en nuestros servidores.</strong> Se usa en tu
-                propio teléfono para centrar el mapa y para sugerirte una posición cuando creas un
-                reporte.
+                <strong>Tu ubicación exacta no se guarda en nuestros servidores.</strong> Se usa en
+                tu propio teléfono para centrar el mapa y para sugerirte una posición cuando creas
+                un reporte.
+              </li>
+              <li>
+                <strong>Solo si activas los avisos de reportes cercanos</strong>, guardamos tu
+                última ubicación conocida <strong>redondeada a unos 500 metros</strong>, nunca la
+                posición exacta. Se actualiza cuando abres el mapa y sirve únicamente para saber si
+                un reporte nuevo está a 1,5 km o menos de ti. Si apagas los avisos en
+                <strong>Configuración › Notificaciones</strong>, esa ubicación se borra.
               </li>
               <li>
                 <strong>Las coordenadas que sí se guardan son las del gato</strong>, no las tuyas:
                 las que quedan asociadas a un reporte que publicas. Puedes ajustarlas antes de
                 publicar si no quieres señalar un punto exacto, por ejemplo si coincide con tu
                 domicilio.
+              </li>
+              <li>
+                <strong>Las fotos pueden traer ubicación.</strong> Si una foto incluye la posición
+                donde se tomó, la app puede usarla en tu teléfono para proponerte la ubicación del
+                reporte. Antes de subir la foto, esos datos se eliminan de la imagen.
               </li>
               <li>
                 <strong>Puedes usar la app sin dar ubicación</strong>, aunque el mapa no podrá
@@ -169,6 +211,7 @@
               <li>Tus reportes, con sus fotos, descripción, estado y ubicación del gato.</li>
               <li>Tu nombre de usuario, tu biografía y tu foto de perfil.</li>
               <li>El número de avistamientos registrados en cada reporte.</li>
+              <li>Tus medallas y tu marco, salvo que apagues la opción <strong>Mostrar mis logros y mi marco en mi perfil público</strong> en <strong>Perfil › Editar Perfil</strong>. Viene activada por defecto. Nunca se muestra información de anuncios.</li>
             </ul>
             <p>
               Tu correo electrónico puede ocultarse a las demás personas desde
@@ -219,12 +262,17 @@
                   </tr>
                   <tr>
                     <td><strong>Apple</strong></td>
-                    <td>Sign in with Apple, si eliges ese método para entrar.</td>
+                    <td>Sign in with Apple, si eliges ese método para entrar, y entrega de las notificaciones en iPhone y iPad.</td>
+                    <td>Estados Unidos</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Google</strong></td>
+                    <td>Iniciar sesión con Google, si eliges ese método, y entrega de las notificaciones en Android.</td>
                     <td>Estados Unidos</td>
                   </tr>
                   <tr>
                     <td><strong>Expo</strong></td>
-                    <td>Entregar actualizaciones de la aplicación. Recibe datos técnicos del dispositivo al comprobar si hay una versión nueva.</td>
+                    <td>Entregar actualizaciones de la aplicación y enviar los avisos de reportes cercanos a través de Apple y Google. Recibe el token de notificaciones, el texto del aviso y datos técnicos del dispositivo.</td>
                     <td>Estados Unidos</td>
                   </tr>
                 </tbody>
@@ -266,6 +314,16 @@
               <li>Tu perfil: nombre de usuario, biografía y foto de perfil, incluido el archivo de imagen.</li>
               <li>Tu dirección de correo electrónico.</li>
               <li>El registro de los gatos que marcaste como vistos.</li>
+              <li>Tu token de notificaciones, tus preferencias de avisos, tu zona horaria y la ubicación aproximada guardada para ellos.</li>
+              <li>Tus logros: medallas, marco y pin.</li>
+              <li>Si entraste con Google, el nombre y la dirección de la foto que Google entregó.</li>
+            </ul>
+
+            <p><strong>Datos de los avisos mientras mantienes tu cuenta</strong></p>
+            <ul>
+              <li>La <strong>ubicación aproximada</strong> se conserva mientras los avisos estén activos, y se reemplaza cada vez que se actualiza. Se borra al apagarlos o al eliminar tu cuenta.</li>
+              <li>El <strong>token de notificaciones</strong> se borra al cerrar sesión en ese teléfono, al eliminar tu cuenta o cuando el sistema informa que ya no es válido.</li>
+              <li>El <strong>registro de avisos enviados</strong>, que evita avisarte dos veces del mismo reporte, se elimina automáticamente a las 24 horas.</li>
             </ul>
 
             <p><strong>Qué permanece publicado</strong></p>
@@ -351,6 +409,10 @@
                 Las fotografías se guardan en depósitos con permisos por usuario y límites de tipo
                 y tamaño de archivo.
               </li>
+              <li>
+                Antes de subir una foto, la app le quita los metadatos, como la ubicación GPS de la
+                cámara. Si no puede hacerlo, la foto no se sube.
+              </li>
             </ul>
             <p>
               Ningún sistema es infalible. Si detectamos una brecha que afecte tus datos
@@ -362,7 +424,7 @@
           <section class="bloque" id="menores">
             <h2>9. Menores de edad</h2>
             <p>
-              CatFinder está dirigida a personas de <strong>13 años o más</strong>. No recopilamos
+              CatFinder está dirigida a personas de <strong>16 años o más</strong>. No recopilamos
               de forma consciente datos de menores de esa edad. Si detectamos una cuenta en esa
               situación, la eliminaremos junto con sus datos. Si eres madre, padre o tutor y crees
               que un menor a tu cargo creó una cuenta, escríbenos a
@@ -378,6 +440,11 @@
               analítica</strong> y <strong>no rastrea tu actividad en otras aplicaciones o sitios
               web</strong>. Tampoco usamos cookies de seguimiento: la aplicación no se apoya en un
               navegador para funcionar.
+            </p>
+            <p>
+              El token de notificaciones es un código que asigna el sistema a tu teléfono. Lo
+              usamos solo para entregarte los avisos que activaste, no para identificarte entre
+              aplicaciones.
             </p>
           </section>
 

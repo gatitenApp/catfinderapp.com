@@ -686,7 +686,8 @@ th{
 
 @media (min-width: 860px){
   .envoltura{ padding: 0 1.5rem; }
-  .panel{ margin: 2rem 0 3rem; }
+  /* Solo márgenes verticales: el shorthand pisaba el auto lateral de .panel--texto. */
+  .panel{ margin-top: 2rem; margin-bottom: 3rem; }
   .contenido{ padding: 2.25rem 2.75rem 3rem; }
   .pie__interior{
     flex-direction: row;
